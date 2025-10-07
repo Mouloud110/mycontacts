@@ -5,13 +5,16 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/index.js",
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "test": "jest --coverage"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.10",
+    "supertest": "^6.3.4"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
@@ -22,5 +25,12 @@
     "mongoose": "^8.18.1",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "testTimeout": 30000
   }
 }
