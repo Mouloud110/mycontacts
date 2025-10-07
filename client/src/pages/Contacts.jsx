@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+
 function Contacts() {
   const [contacts, setContacts] = useState([]);
   const [firstName, setFirstName] = useState('');
@@ -22,7 +24,7 @@ function Contacts() {
 
   const fetchContacts = async () => {
     try {
-      const response = await fetch('http://localhost:4000/contacts', {
+      const response = await fetch(`${API_URL}/contacts`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await response.json();
@@ -42,7 +44,7 @@ function Contacts() {
 
     try {
       if (editingId) {
-        const response = await fetch(`http://localhost:4000/contacts/${editingId}`, {
+        const response = await fetch(`${API_URL}/contacts/${editingId}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -54,7 +56,7 @@ function Contacts() {
         if (!response.ok) throw new Error('Update failed');
         setEditingId(null);
       } else {
-        const response = await fetch('http://localhost:4000/contacts', {
+        const response = await fetch(`${API_URL}/contacts`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -86,7 +88,7 @@ function Contacts() {
     if (!confirm('Delete this contact?')) return;
 
     try {
-      const response = await fetch(`http://localhost:4000/contacts/${id}`, {
+      const response = await fetch(`${API_URL}/contacts/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` }
       });
